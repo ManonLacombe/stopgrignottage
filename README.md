@@ -119,7 +119,7 @@ Le conteneur Android (une activité, un WebView, aucun autre code) vit dans `and
 
 ```bash
 cd android
-./build.sh
+bash build.sh
 ```
 
 Prérequis : SDK Android (build-tools 34, platform android-34) et un JDK 17 ou plus. Le script enchaîne `aapt2`, `javac`, `d8`, `zipalign` et `apksigner`, puis copie l'APK à la racine du dépôt.
