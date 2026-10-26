@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>StopGrignottage</title>
+  <meta name="description" content="Comprendre ses envies de grignoter et trouver une autre idée, sans culpabilité. Toutes les données restent sur ton téléphone.">
+  <meta name="theme-color" content="#FBF8F3" media="(prefers-color-scheme: light)">
+  <meta name="theme-color" content="#141712" media="(prefers-color-scheme: dark)">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="default">
+  <meta name="apple-mobile-web-app-title" content="StopGrignottage">
+  <link rel="manifest" href="manifest.json">
+  <link rel="icon" href="icons/icon-192.png" sizes="192x192" type="image/png">
+  <link rel="apple-touch-icon" href="icons/icon-180.png">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <a class="skip-link" href="#app">Aller au contenu</a>
+  <div id="app" tabindex="-1"></div>
+  <div id="live" class="sr-only" aria-live="polite" aria-atomic="true"></div>
+  <div id="toast" class="toast" role="status" aria-live="polite"></div>
+
+  <dialog id="dialog" class="dialog" aria-labelledby="dialog-title">
+    <form id="dialog-form" class="dialog-card" novalidate>
+      <div class="dialog-icon" id="dialog-icon" aria-hidden="true"></div>
+      <h2 id="dialog-title"></h2>
+      <p id="dialog-message" class="dialog-message"></p>
+      <label class="field dialog-field" id="dialog-field" hidden>
+        <span id="dialog-label">Valeur</span>
+        <input id="dialog-input" type="text" autocomplete="off">
+      </label>
+      <div class="dialog-actions">
+        <button type="button" class="btn btn-ghost" id="dialog-cancel">Annuler</button>
+        <button type="submit" class="btn btn-primary" id="dialog-confirm">Valider</button>
+      </div>
+    </form>
+  </dialog>
+
+  <script src="app.js" defer></script>
+</body>
+</html>
