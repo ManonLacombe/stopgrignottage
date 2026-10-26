@@ -7,7 +7,7 @@ StopGrignottage est une petite application mobile qui pose quelques questions po
 - **Aucun compte**, aucun serveur, aucune publicité.
 - **Toutes les données restent sur le téléphone** (stockage local du navigateur).
 - **Fonctionne hors connexion** une fois installée.
-- **Installable sur Android** depuis Chrome, comme une application.
+- **Installable sur Android** depuis Chrome, ou avec l'**APK** fourni.
 
 > L'application n'est pas un régime et ne remplace pas un professionnel de santé. C'est un outil d'observation, à utiliser sans pression.
 
@@ -38,6 +38,27 @@ L'application est publiée sur GitHub Pages :
 2. Appuyer sur le bouton **« Installer sur ton téléphone »** s'il apparaît.
 3. Sinon : menu **⋮** de Chrome → **Ajouter à l'écran d'accueil**.
 4. L'icône apparaît ensuite avec les autres applications. Elle s'ouvre en plein écran et fonctionne sans Internet.
+
+---
+
+## 🤖 APK Android (installation directe)
+
+Pour installer l'app sans passer par Chrome, un APK signé est disponible :
+
+**<https://github.com/ManonLacombe/stopgrignottage/raw/main/StopGrignottage.apk>**
+
+<p align="center">
+  <img src="qrcode.png" width="180" alt="QR code pour télécharger l'APK StopGrignottage">
+  <br>
+  <sub>À scanner avec l'appareil photo du téléphone</sub>
+</p>
+
+1. Scanner le QR code, ou ouvrir le lien depuis le téléphone.
+2. Chrome télécharge `StopGrignottage.apk` (44 Ko).
+3. Ouvrir le fichier, puis **Installer**. Android demande d'autoriser les applications de sources inconnues pour Chrome : accepter.
+4. L'app s'installe avec sa propre icône, comme les autres.
+
+L'APK est un **conteneur natif** : il affiche l'application publiée sur GitHub Pages en plein écran, sans barre d'adresse, et garde ses données locales sur le téléphone. La première ouverture demande Internet ; ensuite le service worker permet de fonctionner hors ligne.
 
 ---
 
@@ -92,6 +113,20 @@ Puis ouvrir <http://localhost:8000>.
 
 Pour tester le mode hors ligne : charger la page une première fois, puis couper le réseau et recharger.
 
+### Reconstruire l'APK
+
+Le conteneur Android (une activité, un WebView, aucun autre code) vit dans `android/` et se compile **sans Gradle ni Android Studio** :
+
+```bash
+cd android
+./build.sh
+```
+
+Prérequis : SDK Android (build-tools 34, platform android-34) et un JDK 17 ou plus. Le script enchaîne `aapt2`, `javac`, `d8`, `zipalign` et `apksigner`, puis copie l'APK à la racine du dépôt.
+
+La clé de signature est créée au premier lancement dans `android/signing/` (exclue de git). **Conserve-la et sauvegarde-la** : une mise à jour doit être signée avec la même clé pour pouvoir s'installer par-dessus l'app déjà présente.
+
+
 ---
 
 ## 🚀 Publication sur GitHub Pages
@@ -117,6 +152,9 @@ manifest.json           Configuration PWA (installation Android)
 sw.js                   Service worker (fonctionnement hors connexion)
 icons/                  Icônes de l'application
 docs/                   Captures d'écran pour le README
+qrcode.png              QR code de téléchargement de l'APK
+StopGrignottage.apk     APK Android signé (conteneur natif de l'app web)
+android/                Source du conteneur Android + script de compilation
 README.md               Ce document
 ```
 
@@ -141,6 +179,7 @@ README.md               Ce document
 - [x] Historique local (date, cause, décision, activité choisie)
 - [x] Statistiques locales
 - [x] Questionnaire modifiable dans l'application
+- [x] APK Android signé, avec QR code de téléchargement
 - [ ] Export / import des données (piste pour une prochaine version)
 
 ---
